@@ -50,7 +50,7 @@ import { Box } from "@mui/system"
 // import InfiniteScroll from "react-infinite-scroller"
 import InfiniteScroll from "react-infinite-scroll-component"
 import { setSnackbar } from "../../store/snackbarSlice"
-import { useUser } from "../../hooks/useUser"
+// import { useUser } from "../../hooks/useUser"
 
 export const Feeds = () => {
   const user = useSelector(userSelector)
@@ -73,8 +73,7 @@ export const Feeds = () => {
   >()
 
   const { polls, pollsLoaded, hasMore, votes, loadFeeds } = useFeeds()
-  const { updateUser } = useUser()
-  console.log(pollsLoaded)
+  // const { updateUser } = useUser()
 
   const [anchorEl, setAnchorEl] = useState<Element | null>(null)
 

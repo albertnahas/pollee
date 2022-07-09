@@ -111,34 +111,7 @@ exports.onUserStatusChanged = functions.database
     // Otherwise, we convert the last_changed field to a Date
     eventStatus.last_changed = new Date(eventStatus.last_changed)
     functions.logger.log(eventStatus)
-    userStatusFirestoreRef.set({ status }, { merge: true }).then(() => {
-      if (status === "offline") {
-        const removePLayersBatch = admin.firestore().batch()
-        const removeRequestsBatch = admin.firestore().batch()
-        admin
-          .firestore()
-          .collectionGroup("players")
-          .where("id", "==", uid)
-          .get()
-          .then((snapshot) => {
-            snapshot.docs.forEach((doc) => {
-              removePLayersBatch.delete(doc.ref)
-            })
-            return removePLayersBatch.commit()
-          })
-        admin
-          .firestore()
-          .collection("requests")
-          .where("uid", "==", uid)
-          .get()
-          .then((snapshot) => {
-            snapshot.docs.forEach((doc) => {
-              removeRequestsBatch.delete(doc.ref)
-            })
-            return removeRequestsBatch.commit()
-          })
-      }
-    })
+    userStatusFirestoreRef.set({ status }, { merge: true })
   })
 
 

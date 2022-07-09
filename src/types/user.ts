@@ -24,7 +24,7 @@ export interface User {
   points?: number
 }
 
-export interface UserSettings { }
+export interface UserSettings {}
 
 export interface UserVote {
   id?: string

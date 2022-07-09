@@ -6,7 +6,7 @@ import { Poll } from "../types/poll"
 import { UserVote } from "../types/user"
 
 export type sort = "uploadedAt" | "rate" | "votesCount"
-const photosLimit = 6
+const photosLimit = 8
 
 const useFeeds = () => {
   const user = useSelector((state: State) => state.user.value)
@@ -16,11 +16,10 @@ const useFeeds = () => {
   const [votesLoaded, setVotesLoaded] = useState(false)
   const [polls, setPolls] = useState<Poll[]>([])
 
+  const lastId = useRef<string | null>(null)
   const loading = useRef(false)
 
   const loadFeeds = (refresh?: boolean) => {
-    console.log("load attempt")
-
     return new Promise((resolve, reject) => {
       if (!user || !votesLoaded || loading.current) {
         resolve(false)
@@ -30,14 +29,12 @@ const useFeeds = () => {
       if (refresh) {
         setHasMore(true)
       }
+
       let query = firebase
         .firestore()
         .collectionGroup(`photos`)
         .where("active", "==", true)
 
-      if (user.blocks) {
-        query = query.where("userId", "not-in", user.blocks)
-      }
       if (votes.length) {
         query = query.where(
           "id",
@@ -48,30 +45,34 @@ const useFeeds = () => {
 
       return query
         .orderBy("id")
-        .orderBy("uploadedAt", "desc")
-        .startAfter(
-          (!refresh && polls[polls?.length - 1]?.id) || 0,
-          (!refresh && polls[polls?.length - 1]?.uploadedAt) || 0
-        )
+        .startAfter((!refresh && lastId.current) || 0)
         .limit(photosLimit)
         .get()
         .then((querySnapshot: any) => {
-          console.log("querySnapshot", querySnapshot.size)
           if (!querySnapshot?.size) {
             setHasMore(false)
           }
           const fetchedPolls: Poll[] = []
           querySnapshot?.forEach((doc: any) => {
-            if (doc.data().userId !== user.uid) {
+            if (
+              doc.data().userId !== user.uid &&
+              (!user.blocks || user.blocks.indexOf(doc.data().userId) === -1) &&
+              (doc.data().showTo === "both" ||
+                doc.data().showTo === user.gender)
+            ) {
               fetchedPolls.push({ id: doc.id, ...doc.data() })
             }
+            lastId.current = doc.id
           })
-          setPolls((prevPolls) =>
-            refresh ? [...fetchedPolls] : [...prevPolls, ...fetchedPolls]
-          )
+          if (!fetchedPolls.length) {
+            setHasMore(false)
+          } else {
+            setPolls((prevPolls) =>
+              refresh ? [...fetchedPolls] : [...prevPolls, ...fetchedPolls]
+            )
+          }
           setPollsLoaded(true)
           loading.current = false
-          console.log("resolved")
           resolve(true)
         })
         .catch((error: any) => {

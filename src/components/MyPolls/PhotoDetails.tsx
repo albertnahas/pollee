@@ -185,7 +185,7 @@ export var PhotoDetails: FC<Props> = function (props) {
           />
         </Paper>
         {photo && photo.type === "rate" && (
-          <Grid xs={12} item>
+          <Grid sx={{ mb: 1 }} xs={12} item>
             <RateProgressBar value={(photo?.rate || 0) * 20} />
           </Grid>
         )}
