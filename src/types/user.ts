@@ -1,6 +1,6 @@
 import firebase from "../config"
 
-export interface User extends UserStats {
+export interface User {
   uid?: string
   age?: number
   displayName?: string
@@ -16,27 +16,14 @@ export interface User extends UserStats {
   colorMode?: "light" | "dark"
   settings?: UserSettings
   messagingToken?: string
-  history?: UserStats[]
   providers?: string[]
   complete?: boolean
   blocks?: string[]
   interests?: string[]
-}
-
-export interface UserStats {
-  gamesPlayed?: number
-  roundsPlayed?: number
-  accuracy?: number
-  xp?: number
-  lifeScore?: number
-  streak?: number
-  level?: number
-  languages?: string[]
-  statDate?: Date
   points?: number
 }
 
-export interface UserSettings {}
+export interface UserSettings { }
 
 export interface UserVote {
   id?: string

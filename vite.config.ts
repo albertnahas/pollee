@@ -25,8 +25,7 @@ export default defineConfig({
       manifest: {
         name: "Pollee",
         short_name: "pollee",
-        description:
-          "The best languages guessing game, invite your friends and guess as many languages as you can",
+        description: "Need help? we've got your back",
         icons: [
           {
             src: "/pwa-chrome-192x192.png",
@@ -46,6 +45,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       workbox: {
         sourcemap: true,
+        maximumFileSizeToCacheInBytes: 4000000,
       },
     }),
   ],
