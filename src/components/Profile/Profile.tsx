@@ -163,7 +163,7 @@ export const Profile: FC<Props> = ({ signOut }) => {
             )}
           </Stack>
         </Grid>
-        <Grid md={12} item>
+        <Grid md={12} xs={12} item>
           <Typography
             variant="body2"
             component="p"

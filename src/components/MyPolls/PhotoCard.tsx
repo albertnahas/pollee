@@ -91,6 +91,7 @@ export const PhotoCard: FC<Props> = ({
                   <Grid xs={12} item>
                     <Button
                       variant="outlined"
+                      component="span"
                       fullWidth
                       color="primary"
                       sx={{
