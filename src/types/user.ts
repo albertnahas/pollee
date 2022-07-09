@@ -19,6 +19,7 @@ export interface User {
   providers?: string[]
   complete?: boolean
   blocks?: string[]
+  skipped?: string[]
   interests?: string[]
   points?: number
 }

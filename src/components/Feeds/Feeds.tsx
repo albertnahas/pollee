@@ -14,6 +14,8 @@ import {
   ImageList,
   ImageListItem,
   ImageListItemBar,
+  LinearProgress,
+  MenuItem,
   TextField,
   Typography,
   useTheme,
@@ -22,7 +24,11 @@ import useFeeds from "../../hooks/useFeeds"
 import { Comment, Poll } from "../../types/poll"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import MoreVertIcon from "@mui/icons-material/MoreVert"
-import { MiniProfileAvatar, SmallProfileAvatar } from "../TopBar/TopBar"
+import {
+  MiniProfileAvatar,
+  SmallProfileAvatar,
+  StyledMenu,
+} from "../TopBar/TopBar"
 import { UserCircle as UserCircleIcon } from "../../icons/user-circle"
 import { useSelector } from "react-redux"
 import { userSelector } from "../../store/userSlice"
@@ -35,6 +41,7 @@ import {
   ChevronLeftOutlined,
   ChevronRightOutlined,
   FavoriteBorder,
+  Flag,
   ModeCommentOutlined,
   SendRounded,
 } from "@mui/icons-material"
@@ -42,6 +49,8 @@ import PullToRefresh from "react-simple-pull-to-refresh"
 import { Box } from "@mui/system"
 // import InfiniteScroll from "react-infinite-scroller"
 import InfiniteScroll from "react-infinite-scroll-component"
+import { setSnackbar } from "../../store/snackbarSlice"
+import { useUser } from "../../hooks/useUser"
 
 export const Feeds = () => {
   const user = useSelector(userSelector)
@@ -64,6 +73,22 @@ export const Feeds = () => {
   >()
 
   const { polls, pollsLoaded, hasMore, votes, loadFeeds } = useFeeds()
+  const { updateUser } = useUser()
+  console.log(pollsLoaded)
+
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null)
+
+  const open = Boolean(anchorEl)
+
+  const handleSetMenuClick = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleSetMenuClose = () => {
+    setAnchorEl(null)
+  }
+
   const theme = useTheme()
 
   const onVote = (poll: Poll, vote?: string | number) => {
@@ -126,6 +151,38 @@ export const Feeds = () => {
       })
   }
 
+  const onFlagPhotoAsInappropriate = (poll?: Poll, reason?: string) => {
+    if (!reason) {
+      return
+    }
+    const reportObj = {
+      userId: user?.uid,
+      reason,
+      reporteddAt: firebase.firestore.FieldValue.serverTimestamp(),
+    }
+    return firebase
+      .firestore()
+      .collection(`users/${poll?.userId}/photos/${poll?.id}/reports`)
+      .add(reportObj)
+      .then((res) => {
+        setSnackbar({
+          open: true,
+          message:
+            "Post has been reported as inappropriate, you will not see it again",
+          type: "success",
+        })
+      })
+  }
+
+  // const onSkip = (poll: Poll) => {
+  //   if (!poll.id) return
+  //   const skipped = user?.skipped || []
+  //   updateUser({
+  //     ...user,
+  //     skipped: [...skipped, poll.id],
+  //   })
+  // }
+
   const displayPolls = () =>
     polls.map((poll: Poll) => {
       const totalVotes =
@@ -150,7 +207,7 @@ export const Feeds = () => {
               </SmallProfileAvatar>
             }
             action={
-              <IconButton aria-label="settings">
+              <IconButton onClick={handleSetMenuClick} aria-label="settings">
                 <MoreVertIcon />
               </IconButton>
             }
@@ -250,6 +307,7 @@ export const Feeds = () => {
                 ))}
               </ButtonGroup>
             )}
+            {voting === poll.id && <LinearProgress />}
             {commenting?.id === poll.id && (
               <Box sx={{ mt: 3 }}>
                 <TextField
@@ -319,6 +377,24 @@ export const Feeds = () => {
                   </Box>
                 </Box>
               )) || <></>}
+            <StyledMenu
+              id="poll-menu"
+              MenuListProps={{
+                "aria-labelledby": "set-button",
+              }}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleSetMenuClose}
+            >
+              <MenuItem
+                onClick={() => {
+                  onFlagPhotoAsInappropriate(poll)
+                }}
+              >
+                <Flag />
+                Flag as inappropriate
+              </MenuItem>
+            </StyledMenu>
           </CardContent>
           <CardActions disableSpacing>
             <IconButton
@@ -363,7 +439,7 @@ export const Feeds = () => {
             <InfiniteScroll
               dataLength={polls.length}
               next={loadFeeds}
-              hasMore={hasMore}
+              hasMore={hasMore && !!polls.length}
               scrollableTarget="body"
               loader={<CircularProgress />}
               endMessage={
@@ -381,7 +457,7 @@ export const Feeds = () => {
           </Box>
         </PullToRefresh>
       )}
-      {/* {!pollsLoaded && <CircularProgress />} */}
+      {!pollsLoaded && <CircularProgress sx={{ mt: 6 }} />}
       <ModalDialog
         open={!!lightbox?.open}
         onClose={() => setLightbox(undefined)}

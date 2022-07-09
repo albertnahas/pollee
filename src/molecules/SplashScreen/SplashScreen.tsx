@@ -26,7 +26,9 @@ export const SplashScreen = () => {
       <Typography variant="h3" color="white">
         Pollee
       </Typography>
-      <CircularProgress sx={{ display: "block", m: "auto", mt: 6 }} />
+      <CircularProgress
+        sx={{ color: "white", display: "block", m: "auto", mt: 6 }}
+      />
     </Box>
   )
 }
