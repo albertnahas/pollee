@@ -1,0 +1,52 @@
+*[class*="fireworks-"] {
+  transform-origin: center;
+}
+.fireworks-1 {
+  fill: #f9a600;
+}
+.fireworks-2 {
+  fill: #0098b3;
+}
+.fireworks-3 {
+  fill: #fa4c5f;
+}
+.fireworks-4 {
+  fill: #60ce8c;
+}
+.fireworks-5 {
+  fill: #fccd2e;
+}
+.fireworks-10,
+.fireworks-11,
+.fireworks-6,
+.fireworks-7,
+.fireworks-8,
+.fireworks-9 {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.fireworks-6 {
+  stroke: #60ce8c;
+}
+.fireworks-10,
+.fireworks-11,
+.fireworks-6,
+.fireworks-7 {
+  stroke-width: 20px;
+}
+.fireworks-7 {
+  stroke: #f9a600;
+}
+.fireworks-10,
+.fireworks-8 {
+  stroke: #0098b3;
+}
+.fireworks-8,
+.fireworks-9 {
+  stroke-width: 22px;
+}
+.fireworks-11,
+.fireworks-9 {
+  stroke: #fa4c5f;
+}

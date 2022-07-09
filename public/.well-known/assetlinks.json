@@ -1,0 +1,6 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "com.pollee.twa",
+                     "sha256_cert_fingerprints": ["94:3C:E9:6E:DA:8A:E6:3B:E3:32:2D:EC:B3:96:BD:ED:C7:84:BE:9A:32:05:E2:69:69:68:AC:A1:C3:65:43:AC"] }
+      }
+]
