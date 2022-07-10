@@ -7,7 +7,7 @@ export interface User {
   photoURL?: string
   email?: string
   emailVerified?: boolean
-  gender?: "male" | "female"
+  gender?: "male" | "female" | "non-binary"
   lastVotedAt?: firebase.firestore.Timestamp
   lastStreakUpdateAt?: firebase.firestore.Timestamp
   onBoarding?: boolean

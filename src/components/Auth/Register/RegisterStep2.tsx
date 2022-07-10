@@ -34,7 +34,7 @@ export const RegisterStep2: FC<Props> = function (props) {
       updateUser({
         uid: props.uid,
         age: values.age,
-        gender: values.gender as "male" | "female" | undefined,
+        gender: values.gender as "male" | "female" | "non-binary" | undefined,
         interests: values.interests,
         complete: true,
       })
@@ -56,7 +56,7 @@ export const RegisterStep2: FC<Props> = function (props) {
         <form onSubmit={formik.handleSubmit}>
           <Box sx={{ my: 3 }}>
             <Typography color="textPrimary" variant="h4">
-              Tell us more about you
+              Tell us more about yourself
             </Typography>
             <Typography color="textSecondary" gutterBottom variant="body2">
               Fill in the information below to get started
@@ -94,6 +94,11 @@ export const RegisterStep2: FC<Props> = function (props) {
                   value="male"
                   control={<Radio size="small" />}
                   label="Male"
+                />
+                <FormControlLabel
+                  value="non-binary"
+                  control={<Radio size="small" />}
+                  label="Non-binary"
                 />
               </RadioGroup>
             </FormControl>
