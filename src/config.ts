@@ -49,7 +49,7 @@ export const getToken = () => {
   return messaging
     .getToken({
       vapidKey:
-        "BB-ZtExWjS9k8CCdK1gMs-adp2YAzKC7jAK53xD4BgiFP--4AvHUt3ZPI0oKeg1ALVz7VY85mEVNkAF_Dm45B2I",
+        "BAi2TxGo3cxAAEAbr3J2sRxErv-ZRHCH-wWLcwPE_hiWRgjPv327Ynr058uteIeDVWCXRwnNdY5VKGvWtOxYj2c",
     })
     .then((currentToken: any) => {
       if (currentToken) {
