@@ -95,9 +95,9 @@ export const PollDetailsForm: FC<Props & FormikProps<Poll>> = function ({
                   label="Males"
                 />
                 <FormControlLabel
-                  value="both"
+                  value="all"
                   control={<Radio size="small" />}
-                  label="Both"
+                  label="All"
                 />
               </RadioGroup>
             </FormControl>
