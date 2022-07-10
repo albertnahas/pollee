@@ -55,12 +55,12 @@ export var Landing: FC<Props> = function (props) {
                 color="primary"
                 sx={{ fontSize: "2em", py: 2 }}
               >
-                Need help? we've got your back
+                Need help? We've got your back
               </Typography>
               <Typography variant="body1" color="text.secondary">
-                Ask the community's opinion on anything that matters to you.
-                wether it's a choice of your next instagram post or buying the
-                house of your dreams. get instant feedback, and give your
+                Ask the community's opinion on anything that matters to you. No
+                matter if it's a choice of your next Instagram post or buying
+                the house of your dreams. Get instant feedback, and give your
                 opinion to help others in return.
               </Typography>
             </Box>

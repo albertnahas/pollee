@@ -23,31 +23,31 @@ const onBoardingSteps: OnBoardingStep[] = [
   {
     title: "Post your polls",
     icon: Step1Icon,
-    body: `Start posting polls to the app, in order to
-        get the users feedback and votes, don&apos;t hesitate
-        to experiment with photos too`,
+    body: `Start posting polls to the app in order to
+        get the users feedback and votes. Don't hesitate
+        to experiment with photos too.`,
   },
   {
     title: "Activate your poll",
     icon: Step2Icon,
-    body: `Make sure your poll is active, using the switch at the bottom left of each
-        poll under My Polls tab, people can&apos;t see your
-        polls when they are disabled`,
+    body: `Make sure your poll is active using the switch at the bottom left of each
+        poll under My Polls tab. People can't see your
+        polls when they are disabled.`,
   },
   {
     title: "Check your feeds and vote",
     icon: Step3Icon,
-    body: `Explore home tab where you can see other people
-        polls, You will get one token for every five votes you
-        give, every token allows you to recieve one vote, you
-        start with two free tokens`,
+    body: `Explore the Home tab where you can see other people's
+        polls: you will get one token for every five votes you
+        give. Every token allows you to receive one vote. At
+        the beginning you get two free tokens.`,
   },
   {
     title: "Watch your insights",
     icon: Step4Icon,
-    body: `Watch the votes given by people instantly, click each
-        poll to get detailed overview, including people
-        comments and impressions`,
+    body: `Watch the votes given by people instantly: click each
+        poll to get detailed overview, including people's
+        comments and impressions.`,
   },
 ]
 

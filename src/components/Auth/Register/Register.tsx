@@ -40,7 +40,7 @@ export var Register: FC<Props> = function (props) {
       lastName: Yup.string().max(255).required("Last name is required"),
       password: Yup.string().max(255).required("Password is required"),
       age: Yup.number().max(90).min(16).required("Age is required"),
-      gender: Yup.string().required("Age is required"),
+      gender: Yup.string().required("Gender is required"),
     }),
     onSubmit: (values, { resetForm, setErrors, setSubmitting }) => {
       props
@@ -157,7 +157,7 @@ export var Register: FC<Props> = function (props) {
             error={Boolean(formik.touched.age && formik.errors.age)}
             helperText={formik.touched.age && formik.errors.age}
             fullWidth
-            label="age"
+            label="Age"
             margin="dense"
             name="age"
             aria-label="age"
@@ -182,6 +182,11 @@ export var Register: FC<Props> = function (props) {
                 label="Female"
               />
               <FormControlLabel value="male" control={<Radio />} label="Male" />
+              <FormControlLabel
+                value="non-binary"
+                control={<Radio />}
+                label="Non-binary"
+              />
             </RadioGroup>
           </FormControl>
           <Box sx={{ py: 2 }}>

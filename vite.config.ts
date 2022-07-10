@@ -25,7 +25,7 @@ export default defineConfig({
       manifest: {
         name: "Pollee",
         short_name: "pollee",
-        description: "Need help? we've got your back",
+        description: "Need help? We've got your back",
         icons: [
           {
             src: "/pwa-chrome-192x192.png",

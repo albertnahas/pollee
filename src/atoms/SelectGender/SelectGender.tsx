@@ -29,9 +29,9 @@ export var SelectGender: FC<Props> = function (props) {
           label="Males"
         />
         <FormControlLabel
-          value="both"
+          value="all"
           control={<Radio size="small" />}
-          label="Both"
+          label="All"
         />
       </RadioGroup>
     </FormControl>

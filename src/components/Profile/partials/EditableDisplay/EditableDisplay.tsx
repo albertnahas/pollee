@@ -27,7 +27,7 @@ export const EditableDisplay: FC<Props> = ({ name, label, text, onSubmit }) => {
       dispatch(
         setSnackbar({
           open: true,
-          message: `${label} updated!`,
+          message: `${label} has been updated!`,
           type: "success",
         })
       )
