@@ -114,7 +114,7 @@ export var ProfileInfo = function () {
               }}
             >
               <Typography color="textSecondary" variant="caption">
-                Votes you have given
+                How many votes you have given
               </Typography>
             </Box>
           </CardContent>
